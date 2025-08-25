@@ -1,5 +1,5 @@
 export default async function Home() {
-  const res = await fetch("http://localhost:3000/api/sheet", { cache: "no-store" });
+  const res = await fetch("http://https://grapes-iota.vercel.app/api/sheet", { cache: "no-store" });
   console.log("res", res);
   const { data } = await res.json();
 
