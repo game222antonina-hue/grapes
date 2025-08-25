@@ -1,19 +1,25 @@
 import { NextResponse } from "next/server";
 
-const SHEET_ID = "В1X_FcYWu_WNEFBh18_Q8B82lkHk7ZX0jfsq24W2_OJ2A";
-const RANGE = "A:B"; // диапазон (A - текст, B - ссылка)
+const SHEET_ID = "1X_FcYWu_WNEFBh18_Q8B82lkHk7ZX0jfsq24W2_OJ2A";
+const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
 export async function GET() {
   try {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${process.env.GOOGLE_API_KEY}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Ошибка запроса к Google Sheets API");
+    const res = await fetch(CSV_URL);
+    console.log("res", res);
+    if (!res.ok) throw new Error("Ошибка запроса к Google Sheets CSV");
 
-    const json = await res.json();
+    const csv = await res.text();
 
-    const [headers, ...rows] = json.values;
+    // Парсим CSV
+    const rows = csv
+      .trim()
+      .split("\n")
+      .map((row) => row.split(","));
 
-    const data = rows.map((row) => ({
+    const [headers, ...dataRows] = rows;
+
+    const data = dataRows.map((row) => ({
       text: row[0] || "",
       link: row[1] || "",
     }));
