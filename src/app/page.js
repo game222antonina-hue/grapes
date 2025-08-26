@@ -9,8 +9,12 @@ export default async function Home() {
       <ul>
         {data?.map((item, i) => (
           <li key={i}>
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
-              {item.text}
+            <a
+              href={(item.link || "").replace(/^"|"$/g, "")}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {item.text.replace(/^"|"$/g, "")}
             </a>
           </li>
         ))}
