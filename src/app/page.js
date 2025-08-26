@@ -1,8 +1,9 @@
 export default async function Home() {
-  const protocol = process.env.VERCEL_URL ? "https://" : "http://localhost:3000";
-  const baseUrl = process.env.VERCEL_URL
-    ? `${protocol}${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
+  // Определяем базовый URL для fetch на сервере
+  const baseUrl =
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
 
   const res = await fetch(`${baseUrl}/api/sheet`, { cache: "no-store" });
   const { data } = await res.json();
