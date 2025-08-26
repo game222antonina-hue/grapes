@@ -1,5 +1,11 @@
 export default async function Home() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  // Определяем базовый URL автоматически
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (typeof window === "undefined"
+      ? `http://${process.env.VERCEL_URL || "localhost:3000"}`
+      : "");
+
   const res = await fetch(`${baseUrl}/api/sheet`, { cache: "no-store" });
   const { data } = await res.json();
 
