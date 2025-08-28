@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true
-  },
-  // Если нужно явно указать папку исходников
-  srcDir: "src"
-};
+const nextConfig = {};
 
 export default nextConfig;
