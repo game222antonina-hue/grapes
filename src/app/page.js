@@ -1,21 +1,22 @@
 export default async function Home() {
   // Определяем базовый URL для fetch на сервере
-  const baseUrl =
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
+  // const baseUrl =
+  //   process.env?.VERCEL_URL
+  //     ? `https://${process.env.VERCEL_URL}`
+  //     : "http://localhost:3000";
 
-      console.log('baseUrl', baseUrl, `${baseUrl}/api/sheet`);
+  //     console.log('baseUrl', baseUrl, `${baseUrl}/api/sheet`);
 
-  const res = await fetch(`${baseUrl}/api/sheet`, { cache: "no-store" });
-  console.log('res', res);
-  const { data } = await res.json();
+  // const res = await fetch(`${baseUrl}/api/sheet`, { cache: "no-store" });
+  // console.log('res', res);
+  // const { data } = await res.json();
 
   return (
     <main style={{ padding: 20 }}>
       <h1>Список ссилок на сорта винограду</h1>
+      { process.env?.VERCEL_URL && <p>Deployed on Vercel: {process.env.VERCEL_URL}</p>  }
       <ul>
-        {data?.map((item, i) => (
+        {/* {data?.map((item, i) => (
           <li key={i}>
             <a
               href={(item.link || "").replace(/^"|"$/g, "")}
@@ -25,7 +26,7 @@ export default async function Home() {
               {item.text.replace(/^"|"$/g, "")}
             </a>
           </li>
-        ))}
+        ))} */}
       </ul>
     </main>
   );
