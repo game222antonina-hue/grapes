@@ -8,12 +8,11 @@ export default async function Home() {
   const { data } = await res.json();
 
   return (
-    <main style={{ padding: 20 }}>
+    <main style={{ padding: 20, minHeight: "100svh", position: 'relitive' }}>
       <h1>Список ссилок на сорта винограду</h1>
-      { process.env?.VERCEL_URL && <p>Deployed on Vercel: {process.env.VERCEL_URL}</p>  }
-      <ul>
+      <ul style={{ padding: '20px' }}>
         {data?.map((item, i) => (
-          <li key={i}>
+          <li key={i} style={{padding: '6px 0'}}>
             <a
               href={(item.link || "").replace(/^"|"$/g, "")}
               target="_blank"
@@ -24,6 +23,7 @@ export default async function Home() {
           </li>
         ))}
       </ul>
+      <p style={{position: 'absolute', bottom: "20px", left: '20px'}}>made by Tar Anton</p>
     </main>
   );
 }
