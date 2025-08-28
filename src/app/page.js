@@ -5,7 +5,10 @@ export default async function Home() {
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000";
 
+      console.log('baseUrl', baseUrl, `${baseUrl}/api/sheet`);
+
   const res = await fetch(`${baseUrl}/api/sheet`, { cache: "no-store" });
+  console.log('res', res);
   const { data } = await res.json();
 
   return (
